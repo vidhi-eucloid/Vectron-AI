@@ -1,0 +1,15 @@
+# Databricks Apps manifest. Build first (npm run build) so /dist is uploaded with the app.
+command: ['node', 'server/index.js']
+env:
+  - name: DATABRICKS_ENDPOINT_URL
+    value: 'https://adb-842962623037618.18.azuredatabricks.net/serving-endpoints/mas-a4f8104c-endpoint/invocations'
+  - name: AGENT_PAYLOAD
+    value: 'responses'
+  - name: AGENT_STREAM
+    value: 'false'
+  # seconds the server waits for the supervisor before giving up (default 120)
+  - name: AGENT_TIMEOUT
+    value: '300'
+  # On Databricks Apps the app's service principal credentials (DATABRICKS_CLIENT_ID /
+  # DATABRICKS_CLIENT_SECRET / DATABRICKS_HOST) are injected automatically; grant that
+  # principal CAN QUERY on the serving endpoint instead of setting a PAT.
